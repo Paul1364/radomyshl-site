@@ -1,1 +1,7 @@
-
+body {
+  background-image: url('txf.jpg');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-color: #f8f3e8;
+  font-family: Arial, sans-serif;
+}
