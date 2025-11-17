@@ -16,256 +16,16 @@
   <link rel="stylesheet" href="/styles/style.css">
 
   <link rel="canonical" href="https://radomyshl-istoriya.netlify.app/posts/documents/maslovskiy-1805.html">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0RR86VGXM6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  <style>
-    /* ---------------------------------------------------- */
-    /* ⚙️ ОСНОВНІ НАЛАШТУВАННЯ */
-    /* ---------------------------------------------------- */
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      color: #4a3f35;
-      line-height: 1.5;
-      background-color: #faf6f2;
-    }
-
-    /* ---------------------------------------------------- */
-    /* 🟥 КОЛЬОРИ ТА ШРИФТИ */
-    /* ---------------------------------------------------- */
-    :root {
-      --main-bg: #993333;
-      --light-text: #fff8f0;
-      --accent: #b04a2c;
-      --accent-light: #c05030;
-      --block-bg: #f5e3d3;
-    }
-
-    /* ---------------------------------------------------- */
-    /* 🧭 ШАПКА САЙТУ */
-    /* ---------------------------------------------------- */
-    header {
-      text-align: center;
-      padding: 30px 0;
-      background: var(--main-bg);
-      color: var(--light-text);
-      border-radius: 5px;
-    }
-
-    /* Назва сайту (окремо від h1 статті) */
-    .site-title {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: var(--light-text);
-      margin: 0;
-      text-align: center;
-    }
-
-    header p {
-      margin: 5px 0 0 0;
-      font-size: 1rem;
-      color: var(--light-text);
-    }
-
-    /* ---------------------------------------------------- */
-    /* 🧱 НАВІГАЦІЯ */
-    /* ---------------------------------------------------- */
-    nav {
-      margin: 5px 0;
-    }
-
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    nav ul li {
-      flex: 1;
-    }
-
-    nav ul li a {
-      display: block;
-      padding: 12px 0;
-      text-align: center;
-      background: var(--main-bg);
-      color: var(--light-text);
-      text-decoration: none;
-      border-radius: 0;
-      transition: background 0.3s;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    nav ul li:first-child a {
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-    }
-
-    nav ul li:last-child a {
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-    }
-
-    nav ul li a:hover,
-    nav ul li a.active {
-      background: #e28b5a;
-    }
-
-    /* ---------------------------------------------------- */
-    /* 📦 ОСНОВНИЙ КОНТЕЙНЕР */
-    /* ---------------------------------------------------- */
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      background: var(--block-bg);
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    }
-
-    /* ---------------------------------------------------- */
-    /* 📜 ОСНОВНИЙ ВМІСТ */
-    /* ---------------------------------------------------- */
-    main {
-      padding: 10px 0;
-    }
-
-    /* Тільки h1 — коричнево-червонуватий колір */
-    h1 {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      color: #b04a2c;
-      /* коричнево-червонуватий колір */
-      margin-top: 0;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-    }
-
-    /* h2–h6 — темні */
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      color: #4a3f35;
-      /* темний */
-      margin-top: 0;
-    }
-
-    h2 {
-      font-size: 1.2rem;
-    }
-
-    h3 {
-      font-size: 1.1rem;
-    }
-
-    .section {
-      margin-bottom: 0;
-    }
-
-    .section p {
-      text-align: justify;
-      text-indent: 1.5em;
-      margin-bottom: 1em;
-    }
-
-    /* ---------------------------------------------------- */
-    /* 🖼️ КАРТИНКИ І ВІДЕО */
-    /* ---------------------------------------------------- */
-    .section img,
-    .section video {
-      display: block;
-      margin: 0 auto 1em;
-      max-width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-
-    .center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 10px 0;
-    }
-
-
-    /* ---------------------------------------------------- */
-    /* 🔢 СПИСКИ */
-    /* ---------------------------------------------------- */
-    .list-block ol {
-      font-size: 0.9em;
-      margin: 0;
-      padding-left: 40px;
-    }
-
-    .list-block {
-      text-align: justify;
-    }
-
-    .list-block li {
-      margin-bottom: 0.8em;
-      line-height: 1.5;
-    }
-
-    /* ---------------------------------------------------- */
-    /* 🔗 ТЕКСТОВІ ПОСИЛАННЯ */
-    /* ---------------------------------------------------- */
-    a:not(nav ul li a) {
-      text-decoration: underline;
-      color: #0000EE;
-    }
-
-    a:not(nav ul li a):visited {
-      color: #551A8B;
-    }
-
-    a:not(nav ul li a):hover {
-      color: var(--main-bg);
-    }
-
-    a:not(nav ul li a):active {
-      color: var(--accent-light);
-    }
-
-    /* ---------------------------------------------------- */
-    /* 🦶 ФУТЕР */
-    /* ---------------------------------------------------- */
-    footer {
-      text-align: center;
-      padding: 15px;
-      margin-top: 20px;
-      background: var(--main-bg);
-      color: var(--light-text);
-      border-radius: 5px;
-      font-size: 0.9rem;
-    }
-
-    /* Підсвітка елемента, на який веде якір */
-    :target {
-      background-color: #fff4c2;
-      /* м’яка жовта підсвітка */
-      transition: background-color 0.8s ease;
-    }
-
-    /* Опціонально — щоб підсвітка зникала плавно */
-    :target {
-      animation: highlight-fade 3s forwards;
-    }
-
-    @keyframes highlight-fade {
-      0% {
-        background-color: #fff4c2;
-      }
-
-      100% {
-        background-color: transparent;
-      }
-    }
-  </style>
+  gtag('config', 'G-0RR86VGXM6');
+</script>
+  
 </head>
 
 
@@ -283,8 +43,8 @@
     <nav>
       <ul>
         <li><a href="/index.html">Головна</a></li>
-        <li><a href="/soon.html">Світлини</a></li>
-        <li><a href="/soon.html">Мапи</a></li>
+        <li><a href="/images/photo.html">Світлини</a></li>
+        <li><a href="/maps/map-gallery.html">Мапи</a></li>
       </ul>
     </nav>
 
@@ -380,6 +140,5 @@
     </footer>
   </div>
 </body>
-
 
 </html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Мапи Радомишля">
+    <title>Мапи Радомишля</title>
+    <link rel="icon" href="/styles/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/styles/style.css">
+
+    <style>
+        /* ---------------------------------------------------- */
+        /* 🗺️ ГАЛЕРЕЯ КАРТ */
+        /* ---------------------------------------------------- */
+        .map-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .map-item {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff0e5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .map-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-item img {
+            width: 66%;
+            height: 150px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 10px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+
+        .map-caption {
+            font-size: 0.9em;
+            color: #4a3f35;
+            text-align: justify;
+            margin-top: 0;
+        }
+
+        /* ---------------------------------------------------- */
+        /* 🌑 МОДАЛЬНЕ ВІКНО */
+        /* ---------------------------------------------------- */
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.is-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 95vh;
+            text-align: center;
+            cursor: move;
+            overflow: hidden;
+        }
+
+        #modal-map-image {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            transition: transform 0.3s ease-out;
+            transform-origin: 0 0;
+            transform: translate(0, 0) scale(1);
+        }
+
+        /* ---------------------------------------------------- */
+        /* 🔙 КНОПКА "ПОВЕРНУТИСЬ НАЗАД" */
+        /* ---------------------------------------------------- */
+        .back-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--light-text);
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            padding: 8px 15px;
+            background: var(--accent);
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+            z-index: 1002;
+            border: 1px solid var(--light-text);
+        }
+
+        .back-link:hover {
+            color: #000;
+            background: var(--accent-light);
+            text-decoration: underline;
+        }
+
+
+
+        /* ---------------------------------------------------- */
+        /* 📱 АДАПТИВНІСТЬ */
+        /* ---------------------------------------------------- */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .map-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .map-item img {
+                height: auto;
+                max-height: 180px;
+            }
+
+            .back-link {
+                top: 10px;
+                right: 10px;
+                font-size: 1rem;
+                padding: 6px 12px;
+            }
+        }
+
+        .site-map ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .site-map li {
+            margin: 5px 0;
+            border-bottom: 1px dashed #d3bda4;
+            padding-bottom: 3px;
+        }
+
+        .site-map a {
+            color: #4a3f35;
+            text-decoration: none;
+        }
+
+        .site-map a:hover {
+            text-decoration: underline;
+            color: var(--accent);
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0RR86VGXM6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-0RR86VGXM6');
+    </script>
+
+
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="site-title">РАДОМИШЛЬ</div>
+            <p>Погляд крізь час</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="/index.html">Головна</a></li>
+                <li><a href="/images/photo.html">Світлини</a></li>
+                <li><a href="map-gallery.html" class="active">Мапи</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section class="section">
+                <h1>Галерея мап</h1>
+                <p><a href="history-of-maps.html">Історія створення карт</a></p>
+
+                <div class="map-gallery">
+                    <div class="map-item" data-large-src="radomyshl13-03-2017-large.jpg">
+                        <img src="radomyshl13-03-2017-thumb.jpg" alt="Мапа Радомишля 2010 р. (мініатюра)">
+                        <p class="map-caption"><strong>Мапа Радомишля:</strong> Створена 2010 р. Назви вулиць оновлені
+                            на 2017 рік. Натисніть, щоб збільшити.</p>
+                    </div>
+
+                    <div class="map-item" data-large-src="dachi2010-large.jpg">
+                        <img src="dachi2010-thumb.jpg" alt="Дачі Радомишля (мініатюра)">
+                        <p class="map-caption"><strong>Дачі Радомишля:</strong> Мапа створена 2010 р. Натисніть, щоб
+                            збільшити.</p>
+                    </div>
+
+                    <div class="map-item" data-large-src="forest-large.jpg">
+                        <img src="forest-thumb.jpg" alt="Ліс (мініатюра)">
+                        <p class="map-caption"><strong>Мапа лісу біля Радомишля:</strong> Створена 1996 року. Відтворена
+                            в цифровому форматі 2006 року. Натисніть, щоб збільшити.</p>
+                    </div>
+
+                    <div class="map-item" data-large-src="radomyshl2006-large.jpg">
+                        <img src="radomyshl2006-thumb.jpg" alt="Мапа Радомишля 2006 р. (мініатюра)">
+                        <p class="map-caption"><strong>Мапа Радомишля:</strong> Створена 1996 року. Відтворена в
+                            цифровому форматі 2006 року. Натисніть, щоб збільшити.</p>
+                    </div>
+                </div>
+
+                <div id="map-modal" class="modal">
+                    <a id="close-modal-top" class="back-link" href="#" role="button">Повернутись назад</a>
+                    <div class="modal-content">
+                        <img id="modal-map-image" src="" alt="Вибрана карта">
+                    </div>
+                </div>
+            </section>
+
+            <br>
+            <hr>
+            <section class="site-map">
+                <h2>Мапа сайту</h2>
+                <ul>
+                    <li><a href="/index.html">Головна</a></li>
+                    <li><a href="/posts/doist-chasy-radom.html">Доісторичні часи Радомишля</a></li>
+                    <li><a href="/posts/budivli-zamka/budivli-radom-zamka.html">Будівлі Радомисльського замка</a></li>
+                    <li><a href="/posts/brama-zamka/post-brama-zamka.html">Брама Радомисльського замка</a></li>
+                    <li><a href="/posts/murovana-rezydentsiya/post1.html">Реконструкція резиденції греко-католицьких
+                            митрополитів у Радомислі</a></li>
+                    <li><a href="/posts/okolytsi/okolytsi-map-1868.html">Радомисль та околиці на топографічній карті
+                            1868 року</a></li>
+                    <li><a href="/posts/documents/knyga-invertariv-1774.html">З Книги інвентарів митрополичої єпархії
+                            уніатської церкви. 1774 рік</a></li>
+                    <li><a href="/posts/documents/raport-kruglov-1803.html">Із рапорту Радомисльського городничого
+                            Круглова Київському військовому губернатору від 18 квітня 1803 р.</a></li>
+                    <li><a href="/posts/documents/maslovskiy-1805.html">З опису Радомисля та повіту, виконаного у 1805
+                            р. губернським землеміром Масловським</a></li>
+                    <li><a href="/posts/documents/zasnuvannia-zamku.html">Локаційна грамота короля Стефана Баторія
+                            києво-печерському архімандриту Мелетію Хребтовичу на заснування замку і міста [Радомишля]
+                            1579 р.</a></li>
+                    <li><a href="/images/photo.html">Світлини</a></li>
+                    <li><a href="map-gallery.html">Мапи</a></li>
+                    <li><a href="history-of-maps.html">Історія створення карт</a></li>
+                    <li><a href="https://radomyshl-nash-dim.blogspot.com/">Повна база статей на сайті «Радомишль — наш
+                            дім»</a></li>
+                </ul>
+            </section>
+
+
+
+        </main>
+
+        <footer>
+            <p>© 2025 Радомишль: Погляд крізь час.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const mapItems = document.querySelectorAll(".map-item");
+            const modal = document.getElementById("map-modal");
+            const modalImg = document.getElementById("modal-map-image");
+            const closeBtn = document.getElementById("close-modal-top");
+
+            let isFullSize = false;
+            let isDragging = false;
+            let wasDragged = false;
+            let startX, startY, translateX = 0, translateY = 0;
+            let offsetX = 0, offsetY = 0;
+            let scale = 1;
+
+            // 📌 Відкриття модального зображення
+            mapItems.forEach(item => {
+                item.addEventListener("click", function () {
+                    const largeSrc = this.getAttribute("data-large-src");
+                    modalImg.src = largeSrc;
+                    modal.classList.add("is-open");
+                    isFullSize = false;
+                    resetPosition();
+                    modalImg.style.maxWidth = "95vw";
+                    modalImg.style.maxHeight = "95vh";
+                    modalImg.style.cursor = "zoom-in";
+                    scale = 1;
+                });
+            });
+
+            // 🔍 Збільшення/зменшення при кліку
+            modalImg.addEventListener("click", function (e) {
+                e.stopPropagation();
+                if (wasDragged) { wasDragged = false; return; }
+
+                if (!isFullSize) {
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+
+                    // Перемикаємо у "повний розмір"
+                    modalImg.style.maxWidth = "none";
+                    modalImg.style.maxHeight = "none";
+                    modalImg.style.cursor = "grab";
+                    isFullSize = true;
+                    scale = 1;
+
+                    // Центруємо зображення точно
+                    requestAnimationFrame(() => {
+                        const rect = modalImg.getBoundingClientRect();
+                        translateX = (viewportWidth / 2) - (rect.left + rect.width / 2);
+                        translateY = (viewportHeight / 2) - (rect.top + rect.height / 2);
+                        offsetX = translateX;
+                        offsetY = translateY;
+                        applyTransform();
+                    });
+                } else {
+                    // Повертаємо у "вписаний" режим
+                    modalImg.style.maxWidth = "95vw";
+                    modalImg.style.maxHeight = "95vh";
+                    modalImg.style.cursor = "zoom-in";
+                    isFullSize = false;
+                    scale = 1;
+                    resetPosition();
+                }
+            });
+
+            // 🖱️ Перетягування
+            modalImg.addEventListener("mousedown", startDrag);
+            modalImg.addEventListener("touchstart", startDrag, { passive: false });
+
+            window.addEventListener("mousemove", onDrag);
+            window.addEventListener("touchmove", onDrag, { passive: false });
+
+            window.addEventListener("mouseup", stopDrag);
+            window.addEventListener("touchend", stopDrag);
+
+            // ❌ Закриття
+            closeBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                closeModal();
+            });
+
+            window.addEventListener("keydown", e => {
+                if (e.key === "Escape" && modal.classList.contains("is-open")) {
+                    closeModal();
+                }
+            });
+
+            // 🎯 Функції
+            function startDrag(e) {
+                if (!isFullSize) return;
+                e.preventDefault();
+                isDragging = true;
+                wasDragged = false;
+
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                startX = clientX - offsetX;
+                startY = clientY - offsetY;
+                modalImg.style.cursor = "grabbing";
+            }
+
+            function onDrag(e) {
+                if (!isDragging || !isFullSize) return;
+                e.preventDefault();
+                wasDragged = true;
+
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                translateX = clientX - startX;
+                translateY = clientY - startY;
+
+                applyTransform();
+            }
+
+            function stopDrag() {
+                if (!isDragging) return;
+                isDragging = false;
+                offsetX = translateX;
+                offsetY = translateY;
+                if (isFullSize) modalImg.style.cursor = "grab";
+            }
+
+            function resetPosition() {
+                translateX = 0;
+                translateY = 0;
+                offsetX = 0;
+                offsetY = 0;
+                applyTransform();
+            }
+
+            // 🧭 Обмеження руху
+            function applyTransform() {
+                if (isFullSize) {
+                    const rect = modalImg.getBoundingClientRect();
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+
+                    const imgWidth = rect.width;
+                    const imgHeight = rect.height;
+
+                    const minX = Math.min(0, viewportWidth - imgWidth);
+                    const minY = Math.min(0, viewportHeight - imgHeight);
+
+                    translateX = Math.min(Math.max(translateX, minX), 0);
+                    translateY = Math.min(Math.max(translateY, minY), 0);
+                } else {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+            }
+
+            function closeModal() {
+                modal.classList.remove("is-open");
+                modalImg.src = "";
+                resetPosition();
+                isFullSize = false;
+                scale = 1;
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
